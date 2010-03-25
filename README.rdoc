@@ -3,7 +3,7 @@
 Description goes here.
 
 == Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
@@ -14,4 +14,4 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2010 pjaspers. See LICENSE for details.
+Copyright (c) 2010 Piet Jaspers 10to1. See LICENSE for details.
