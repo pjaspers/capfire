@@ -1,6 +1,16 @@
 = Capfire
 
-Description goes here.
+Inspired by http://github.com/blog/609-tracking-deploys-with-compare-view we , http://10to1.be, wanted the same for our deploys without having to copy paste each deploy script.
+
+This gem adds a way to send a message to campfire after a deploy, in the message is the app-name, the github-compare view url and the deployer.
+
+== Install
+`gem install capfire`
+
+`script/generate capfire -k "campfire_token" -r "chat_room" -a "campfire_account"`                  
+This will generate a ~/.campfire file containing these settings. Feel free to edit it by hand, or run the generator with bogus data, it's a simple yaml file.
+
+If the user doesn't have a ~/.campfire file it won't try to send a message to Campfire.
 
 == Note on Patches/Pull Requests
 
