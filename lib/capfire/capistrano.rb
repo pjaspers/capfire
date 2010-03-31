@@ -1,8 +1,11 @@
-# Defines deploy:notify_hoptoad which will send information about the deploy to Hoptoad.
+# Defines deploy:notify_campfire
+
+require 'broach'
 
 Capistrano::Configuration.instance(:must_exist).load do
 
-  if File.exists?(File.join(ENV['HOME'],'.campfire'))          
+  # Don't bother users who have capfire installed but don't have a ~/.campfire file
+  if File.exists?(File.join(ENV['HOME'],'.campfire'))
     after "deploy:update_code", "deploy:notify_campfire"
   end
 
@@ -23,7 +26,7 @@ Capistrano::Configuration.instance(:must_exist).load do
       compare_url = "#{github_url}/compare/#{deployed}...#{deploying}"
       config = YAML::load(File.open(File.join(ENV['HOME'],'.campfire')))
       Broach.settings = { 'account' => config["campfire"]["account"], 'token' => config["campfire"]["token"] }
-      Broach.speak(campfire_room,
+      Broach.speak(config["campfire"]["room"]",
                    "I (#{deployer}) deployed #{application} " +
                    "with `cap #{ARGV.join(' ')}` (#{compare_url})"
                    )
