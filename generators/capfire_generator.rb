@@ -25,6 +25,8 @@ campfire:
   account: #{options[:campfire_account]}
   token: #{options[:campfire_token]}
   room: #{options[:chat_room]}
+  message: "I (#deployer#) deployed #application#
+with `cap #args#` (#compare_url#)"
 CONF
       unless campfire_file_exists?
         File.open(File.join(ENV['HOME'],'.campfire'), 'w') do |out|
