@@ -7,10 +7,30 @@ This gem adds a way to send a message to campfire after a deploy, in the message
 == Install
 `gem install capfire`
 
-`script/generate capfire -k "campfire_token" -r "chat_room" -a "campfire_account"`                  
-This will generate a ~/.campfire file containing these settings. Feel free to edit it by hand, or run the generator with bogus data, it's a simple yaml file.
+Now either the generator:
+`script/generate capfire -k "campfire_token" -r "chat_room" -a "campfire_account"`
+This will create a ~/.campfire file and add a line to your config/deploy.rb file. 
 
-If the user doesn't have a ~/.campfire file it won't try to send a message to Campfire.
+Or do it by hand:
+In your config/deploy.rb append `require capfire/capistrano`, in your home folder create .campfire with the following contents
+
+campfire:
+  account: your_campfire_account
+  token: your_campfire_token
+  room: the_campfire_chatroom_to_post in
+  message: "I (#deployer#) deployed #application#
+with `cap #args# (#compare_url#)"
+
+From now on your deploys will send a message to Campfire containing the Github-compare view url.
+
+== Multiple Projects
+
+Either run the generator (without options since you've arleady got a ~/.campfire file it won't complain) again or append by hand the `require capfire/capistrano` line to your deploy file. 
+
+== Usage
+After the install you're done. Really, do a `cap deploy` and it should post to campfire.
+
+If anoyone on the project doesn't have Capfire installed he won't notice a difference, no message will be sent.
 
 == Note on Patches/Pull Requests
 
