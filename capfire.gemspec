@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}
-  s.summary = %q{Send a notification to Campfire after a deploy}
+  s.summary = %q{Send a notification to Campfire after a cap deploy}
   s.test_files = [
     "test/helper.rb",
      "test/test_Capfire.rb"
