@@ -25,15 +25,22 @@ Capistrano::Configuration.instance(:must_exist).load do
       github_url = repository.gsub(/git@/, 'http://').gsub(/\.com:/,'.com/').gsub(/\.git/, '')
       compare_url = "#{github_url}/compare/#{deployed}...#{deploying}"
 
-      # Reading the config file.
-      config = YAML::load(File.open(File.join(ENV['HOME'],'.campfire')))
+      # Reading the config file and drill in on the campfire section of course.
+      config = YAML::load(File.open(File.join(ENV['HOME'],'.campfire')))["campfire"]
 
       # Ugly but it does the job.
-      message = config["campfire"]["message"].gsub(/#deployer#/, deployer).gsub(/#application#/, application).gsub(/#args#/, ARGV.join(' ')).gsub(/#compare_url#/,compare_url)
-
+      message = config["message"].gsub(/#deployer#/, deployer).gsub(/#application#/, application).gsub(/#args#/, ARGV.join(' ')).gsub(/#compare_url#/,compare_url)
+      
+      message = `cowsay "#{message}"` if config["cowsay"]
+      
       # Posting the message.
-      Broach.settings = { 'account' => config["campfire"]["account"], 'token' => config["campfire"]["token"] }
-      Broach.speak(config["campfire"]["room"], message)
+      Broach.settings = {
+        'account' => config["account"],
+        'token' => config["token"],
+        'use_ssl' => (config["ssl"] ||= false)
+      }
+      room = Broach::Room.find_by_name(config["room"])
+      room.paste(message)
     end
   end
 end

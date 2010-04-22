@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["pjaspers"]
-  s.date = %q{2010-03-31}
+  s.date = %q{2010-04-22}
   s.description = %q{Inspired by http://github.com/blog/609-tracking-deploys-with-compare-view}
   s.email = %q{junkiesxl@gmail.com}
   s.extra_rdoc_files = [
@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
      "generators/capfire_generator.rb",
      "generators/lib/insert_commands.rb",
      "generators/templates/capistrano_hook.rb",
-     "lib/capfire.rb",
+     "lib/Capfire.rb",
      "lib/capfire/capistrano.rb"
   ]
   s.homepage = %q{http://github.com/pjaspers/Capfire}

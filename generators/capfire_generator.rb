@@ -24,9 +24,11 @@ class CapfireGenerator < Rails::Generator::Base
 campfire:
   account: #{options[:campfire_account]}
   token: #{options[:campfire_token]}
+  ssl: false
   room: #{options[:chat_room]}
-  message: "I (#deployer#) deployed #application#
-with `cap #args#` (#compare_url#)"
+  message: "I (#deployer#) deployed #application# with `cap #args#` (#compare_url#)"
+  cowsay: true
+  cow: random
 CONF
       unless campfire_file_exists?
         File.open(File.join(ENV['HOME'],'.campfire'), 'w') do |out|
