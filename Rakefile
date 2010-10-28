@@ -15,7 +15,7 @@ begin
       'lib/**/*.rb',
       'lib/templates/*.erb']
     gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
-    gem.add_dependency('broach', '>= 0.1.4')
+    gem.add_dependency('broach', '>= 0.2.1')
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
