@@ -9,7 +9,7 @@ begin
     gem.description = %Q{Inspired by http://github.com/blog/609-tracking-deploys-with-compare-view}
     gem.email = "junkiesxl@gmail.com"
     gem.homepage = "http://github.com/pjaspers/Capfire"
-    gem.authors = ["pjaspers"]
+    gem.authors = ["pjaspers", "atog"]
     gem.files = FileList['[A-Z]*',
       'generators/**/*.*',
       'lib/**/*.rb',
