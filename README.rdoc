@@ -4,12 +4,14 @@ Inspired by http://github.com/blog/609-tracking-deploys-with-compare-view we , h
 
 This gem adds a way to send a message to campfire after a deploy, in the message is the app-name, the github-compare view url and the deployer.
 
+Since version 0.3.0 capfire will also check if the currently deployed version differs from the version you're about to deploy, aka see if you forgot to do a push before deploying. If this happens it'll also post a message to Campfire, since we all know public shaming JustWorks(tm).
+
 == Install
 `gem install capfire`
 
 Now either the generator:
 `script/generate capfire -k "campfire_token" -r "chat_room" -a "campfire_account"`
-This will create a ~/.campfire file and add a line to your config/deploy.rb file. 
+This will create a ~/.campfire file and add a line to your config/deploy.rb file.
 
 Or do it by hand:
 In your config/deploy.rb append `require capfire/capistrano`, in your home folder create .campfire with the following contents
@@ -23,9 +25,13 @@ with `cap #args# (#compare_url#)"
 
 From now on your deploys will send a message to Campfire containing the Github-compare view url.
 
+== Options
+
+Since it's initial release a few options have crept into capfire, take a look at `lib/capfire/capistrano' and look for cowsay, the same for the messages, they're all adjustable in your settings file.
+'
 == Multiple Projects
 
-Either run the generator (without options since you've arleady got a ~/.campfire file it won't complain) again or append by hand the `require capfire/capistrano` line to your deploy file. 
+Either run the generator (without options since you've arleady got a ~/.campfire file it won't complain) again or append by hand the `require capfire/capistrano` line to your deploy file.
 
 == Usage
 After the install you're done. Really, do a `cap deploy` and it should post to campfire.
