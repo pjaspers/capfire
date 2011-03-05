@@ -27,7 +27,8 @@ campfire:
   ssl: false
   room: #{options[:chat_room]}
   message: "I (#deployer#) deployed #application# with `cap #args#` (#compare_url#)"
-  cowsay: true
+  idiot_message: "LATFH: #deployer# wanted to deploy #application#, but forgot to push first."
+  cowsay: false
   cow: random
 CONF
       unless campfire_file_exists?

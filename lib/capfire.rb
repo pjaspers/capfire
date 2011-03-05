@@ -58,9 +58,17 @@ class Capfire
       "#{repo_url}/compare/#{first_commit}...#{last_commit}"
     end
 
+    def default_idiot_message
+      "LATFH: #deployer# wanted to deploy #application#, but forgot to push first."
+    end
+
     # Message to post on deploying without pushing
     def idiot_message(application)
-      "LATFH: #{self.deployer} wanted to deploy #{application}, but forgot to push first."
+      message = self.config["idiot_message"]
+      message = default_idiot_message unless message
+      message.gsub!(/#deployer#/, self.deployer)
+      message.gsub!(/#application#/, application)
+      message
     end
 
     # Message to post to campfire on deploy
