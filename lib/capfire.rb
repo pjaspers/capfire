@@ -1,5 +1,8 @@
 # Gem for applications to automatically post to Campfire after an deploy.
 
+require 'broach'
+require 'etc'
+
 class Capfire
   # To see how it actually works take a gander at the generator
   # or in the capistrano.rb

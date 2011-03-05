@@ -3,7 +3,6 @@
 # There are two ways to use Capfire, either run the generator (see the README)
 # or add 'require "capfire/capistrano"' to your deploy.rb.
 
-require 'broach'
 require 'capfire'
 
 Capistrano::Configuration.instance(:must_exist).load do
