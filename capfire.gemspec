@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["pjaspers", "atog"]
   s.date = %q{2011-03-05}
-  s.description = %q{Inspired by http://github.com/blog/609-tracking-deploys-with-compare-view}
+  s.description = %q{Send a notification to Campfire after a cap deploy}
   s.email = %q{piet@10to1.be}
   s.extra_rdoc_files = [
     "LICENSE",

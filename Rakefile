@@ -6,7 +6,7 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "capfire"
     gem.summary = %Q{Send a notification to Campfire after a cap deploy}
-    gem.description = %Q{Inspired by http://github.com/blog/609-tracking-deploys-with-compare-view}
+    gem.description = %Q{Send a notification to Campfire after a cap deploy}
     gem.email = "piet@10to1.be"
     gem.homepage = "http://github.com/pjaspers/capfire"
     gem.authors = ["pjaspers", "atog"]
