@@ -7,8 +7,8 @@ require 'broach'
 require 'capfire'
 
 Capistrano::Configuration.instance(:must_exist).load do
-
   # Don't bother users who have capfire installed but don't have a ~/.campfire file
+
   if Capfire.config_file_exists?
     if Capfire.valid_config?
       before "deploy:update_code", "capfire:check_for_push"
@@ -27,7 +27,7 @@ Capistrano::Configuration.instance(:must_exist).load do
       deployed_version = current_revision[0,7] rescue "0000000"
       local_version = `git rev-parse HEAD`[0,7]
       if deployed_version == local_version
-        `say -v "Cellos" fail` unless `which say`.empty?
+        `say -v "Cellos" fail` if Capfire.bin_installed("say")
         logger.important "\nDidn't you forget something? A hint: `git push`."
         exit
       end
@@ -49,7 +49,7 @@ the commiters name, the project name and the arguments supplied to cap.
         message = `cowsay "#{message}"` if Capfire.cowsay?
 
         if dry_run
-          logger.info "Capfire would have post:\n#{message}"
+          logger.info "Capfire would have posted:\n#{message}"
         else
           Broach.settings = {
             'account' => Capfire.account,

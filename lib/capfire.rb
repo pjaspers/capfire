@@ -17,20 +17,32 @@ class Capfire
       YAML::load(File.open(File.join(ENV['HOME'],'.campfire')))["campfire"]
     end
 
+    # Campfire room
     def room
       self.config["room"]
     end
 
+    # Campfire account
     def account
       self.config["account"]
     end
 
+    # Campfire token
     def token
       self.config["token"]
     end
 
+    # `brew install cowsay && cowsay "capfire"`
+    #  _________
+    #< capfire >
+    # ---------
+    #        \   ^__^
+    #         \  (oo)\_______
+    #            (__)\       )\/\
+    #                ||----w |
+    #                ||     ||
     def cowsay?
-      config["cowsay"]
+      config["cowsay"] && self.bin_installed?("cowsay")
     end
 
     # Who is deploying
@@ -55,6 +67,9 @@ class Capfire
       message.gsub!(/#compare_url#/, compare_url)
       message
     end
+
+    def bin_installed?(bin_name)
+      !`which #{bin_name}`.empty?
+    end
   end
 end
-
