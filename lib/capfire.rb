@@ -58,8 +58,13 @@ class Capfire
       "#{repo_url}/compare/#{first_commit}...#{last_commit}"
     end
 
-    # Message to post to campfire
-    def message(args,compare_url, application)
+    # Message to post on deploying without pushing
+    def idiot_message(application)
+      "LATFH: #{self.deployer} wanted to deploy #{application}, but forgot to push first."
+    end
+
+    # Message to post to campfire on deploy
+    def deploy_message(args,compare_url, application)
       message = self.config["message"]
       message.gsub!(/#deployer#/, deployer)
       message.gsub!(/#application#/, application)
@@ -68,8 +73,28 @@ class Capfire
       message
     end
 
+    # Quick and irty way to check for installed bins
+    # Ideally this should also check if it's in the users
+    # path etc. Skipping for now.
     def bin_installed?(bin_name)
       !`which #{bin_name}`.empty?
     end
+
+    # Initializes a broach campfire room
+    def broach_room
+      Broach.settings = {
+        'account' => self.account,
+        'token' => self.token,
+        'use_ssl' => true
+      }
+      Broach::Room.find_by_name(self.room)
+    end
+
+    # Posts to campfire
+    def speak(message)
+      self.broach_room.speak(message)
+    end
+
   end
+
 end

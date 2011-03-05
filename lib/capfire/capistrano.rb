@@ -27,7 +27,8 @@ Capistrano::Configuration.instance(:must_exist).load do
       deployed_version = current_revision[0,7] rescue "0000000"
       local_version = `git rev-parse HEAD`[0,7]
       if deployed_version == local_version
-        `say -v "Cellos" fail` if Capfire.bin_installed("say")
+        `say -v "Cellos" fail` if Capfire.bin_installed?("say")
+        Capfire.speak(Capfire.idiot_message(application)) unless dry_run
         logger.important "\nDidn't you forget something? A hint: `git push`."
         exit
       end
@@ -45,19 +46,13 @@ the commiters name, the project name and the arguments supplied to cap.
         local_version = `git rev-parse HEAD`[0,7]
 
         compare_url = Capfire.github_compare_url source_repo_url, deployed_version, local_version
-        message = Capfire.message(ARGV.join(' '), compare_url, application)
+        message = Capfire.deploy_message(ARGV.join(' '), compare_url, application)
         message = `cowsay "#{message}"` if Capfire.cowsay?
 
         if dry_run
           logger.info "Capfire would have posted:\n#{message}"
         else
-          Broach.settings = {
-            'account' => Capfire.account,
-            'token' => Capfire.token,
-            'use_ssl' => true
-          }
-          room = Broach::Room.find_by_name(Capfire.room)
-          room.speak(message)
+          Capfire.speak message
         end
         logger.info "Posting to Campfire"
       rescue => e
