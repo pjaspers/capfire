@@ -16,11 +16,12 @@ This will create a ~/.campfire file and add a line to your config/deploy.rb file
 Or do it by hand:
 In your config/deploy.rb append `require capfire/capistrano`, in your home folder create .campfire with the following contents
 
-campfire:
-  account: your_campfire_account
-  token: your_campfire_token
-  room: the_campfire_chatroom_to_post in
-  message: "I (#deployer#) deployed #application#
+  campfire:
+    account: your_campfire_account
+    token: your_campfire_token
+    room: the_campfire_chatroom_to_post in
+    message: "I (#deployer#) deployed #application#
+
 with `cap #args# (#compare_url#)"
 
 From now on your deploys will send a message to Campfire containing the Github-compare view url.
